@@ -20,6 +20,16 @@ describe('Проверка авторизации', function () {
         cy.get('#exitMessageButton > .exitIcon').should('be.visible');
      })
 
+    it('Верный пароль и неверный логин', function () {
+      cy.visit('https://login.qa.studio');
+      cy.get('#mail').type('geman@dolnikov.ru');
+      cy.get('#pass').type('iLoveqastudio1');
+      cy.get('#loginButton').click();
+      cy.get('#messageHeader').should('be.visible');
+      cy.get('#messageHeader').contains('Такого логина или пароля нет');
+      cy.get('#exitMessageButton > .exitIcon').should('be.visible');
+    })
+    
      it('Неверный пароль и верный логин', function () {
         cy.visit('https://login.qa.studio');
         cy.get('#mail').type('german@dolnikov.ru');
